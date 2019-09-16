@@ -1,0 +1,58 @@
+{% extends "login/base.html" %}
+{% block content %}
+      <h2> Informações de Usuário</h2> <br>
+      <div class= "row">
+        <form method="POST">
+            <div class="form-group row">
+                <label class="col-form-label">Usuário:</label>
+                <div class="col">
+                   <input class="form-control" type="text" name="username">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label">Senha:</label>
+                <div class="col">
+                    <input type="password" class="form-control" name="password">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label">Nome:</label>
+                <div class="col">
+                    <input type="text" class="form-control" name="firstname">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label">Sobrenome:</label>
+                <div class="col">
+                    <input type="text" class="form-control" name="lastname">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label">RA:</label>
+                <div class="col">
+                    <input type="number" class="form-control" name="ra">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label">E-mail:</label>
+                <div class="col">
+                    <input type="email" class="form-control" name="ra">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label">Sexo:</label><br>
+                <input type="radio" name="gender" value="male" checked> Masculino<br>
+                <input type="radio" name="gender" value="female"> Feminino<br>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label">Curso:</label><br>
+                <input type="radio" name="curso" value="ADS" checked> ADS<br>
+                <input type="radio" name="curso" value="BD"> Banco de Dados<br>
+                <input type="radio" name="curso" value="logistica"> Logística<br>
+                <input type="radio" name="curso" value="BD"> Manutenção de Aeronaves<br>
+            </div>
+            <button type="submit">Cadastrar</button><br>
+        </form>
+      </div>
+      
+{% endblock content %}
