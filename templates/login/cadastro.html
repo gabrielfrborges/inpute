@@ -1,7 +1,7 @@
 {% extends "login/base.html" %}
 {% block content %}
       <h2> Informações de Usuário</h2> <br>
-      <div class= "row">
+      <div class= "col">
         <form method="POST">
             <div class="form-group row">
                 <label class="col-form-label">Usuário:</label>
@@ -51,7 +51,7 @@
                 <input type="radio" name="curso" value="logistica"> Logística<br>
                 <input type="radio" name="curso" value="BD"> Manutenção de Aeronaves<br>
             </div>
-            <button type="submit">Cadastrar</button><br>
+            <button class="btn btn-primary" type="submit">Cadastrar</button><br>
         </form>
       </div>
       
