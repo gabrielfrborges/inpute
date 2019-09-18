@@ -1,10 +1,24 @@
 {% extends "login/base.html" %}
 {% block title %}Cadastro{% endblock title %}
+
 {% block content %}
-    <h2>Sing up</2>
-        <form  class='form' method = "POST">
-        {% csrf_token %}
-        {{ form.as_p }}
+    <h2>Sing up</h2>
+        <form method = "POST">
+            {% csrf_token %}
+            <div class= 'form-group'> 
+                {% for field in form %}
+                    <p>
+                        {{ field.label_tag }}<br>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small style="color: grey">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {%  endfor%}
+                    </p>
+                {% endfor %}
+            </div>
         <button type ="submit">Sign up</button>
     </form>
 {% endblock content %}
