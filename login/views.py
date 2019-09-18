@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 # Create your views here.
 def cadastro(request):
-    if request.method() == 'POST':
+    if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
@@ -12,10 +12,10 @@ def cadastro(request):
             raw_passoword = form.cleaned_data.get('password1')
             user = authenticate(username = username, password = raw_password)
             login(request,user)
-            reuturn redirect('home')
-        else:
-            form = UserCreationForm()
-        return render(request, 'login/cadastro.html', {'form': form})
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'login/cadastro.html', {'form': form})
 
-def  cadastro(request):
+def home(request):
     return render(request, 'login/home.html')
