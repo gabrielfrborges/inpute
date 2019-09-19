@@ -2,4 +2,13 @@
 {% block title %}Home{% endblock title %}
 {% block content %}
     <h1>Home Page</h2>
+    <p>
+        <br>
+        Olá {{ data.username }}.<br>
+        {% if data.user_course %}
+            Você estuda {{ data.user_course }}
+        {% else %}
+            Você não estuda nada.
+        {% endif %}
+    </p>
 {% endblock content %}
