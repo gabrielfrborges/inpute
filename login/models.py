@@ -1,17 +1,28 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
+from django.db.models.signals import post_save
+from django.core.exceptions import ObjectDoesNotExist
+from django.dispatch import receiver
+
+
 # Create your models here.
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete = models.CASCADE)
-    user_ra = models.CharField(max_length= 30)
-    USER_COURSES_CHOICES = (
-      (1, 'student'),
-      (2, 'teacher'),
-      (3, 'secretary'),
-      (4, 'supervisor'),
-      (5, 'admin'),
-    )
+  user = models.OneToOneField(User, on_delete = models.CASCADE)
+  user_ra = models.CharField(max_length= 30)
+  COURSE_CHOISES= [
+    ('BD', 'Banco de dados'),
+    ('ADS','Analise e desenvolvimento de sistemas')
+  ]
+  user_course = models.CharField(max_length= 5, choices= COURSE_CHOISES, default= 'ADS')
+  
+  def __str__(self):
+    return self.user.username
 
-    user_course = models.PositiveSmallIntegerField(choices=USER_COURSES_CHOICES)
-    
-
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
+  if created:
+    Profile.objects.create(user=instance)
+  try:
+    instance.profile.save()
+  except ObjectDoesNotExist:
+    Profile.objects.create(user=instance)

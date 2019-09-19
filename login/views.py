@@ -8,13 +8,13 @@ def cadastro(request):
     if request.method == 'POST':
         form = Cadastro(request.POST)
         if form.is_valid():
-            form.save()
-            user.fresh_from_db()
+            user = form.save()
+            user.refresh_from_db()
             user.profile.user_ra = form.cleaned_data.get('user_ra')
-            #user.profile.user_course = form.cleaned_data.get('user_course')
+            user.profile.user_course = form.cleaned_data.get('user_course')
             user.save()
             username = form.cleaned_data.get('username')
-            raw_passoword = form.cleaned_data.get('password1')
+            raw_password = form.cleaned_data.get('password1')
             user = authenticate(username = username, password = raw_password)
             login(request,user)
             return redirect('home')
@@ -23,4 +23,14 @@ def cadastro(request):
     return render(request, 'login/cadastro.html', {'form': form})
 
 def home(request):
-    return render(request, 'login/home.html')
+    if user.is_authenticated():
+        data = {
+            'username':user.username,
+            'user_course':user.profile.get_user_courses_display()
+        }
+    else:
+        data = {
+            'username':'Annoymous',
+            'user_course':''
+        }
+    return render(request, 'login/home.html', {'data': data })
