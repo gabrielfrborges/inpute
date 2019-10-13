@@ -1,14 +1,20 @@
 {% extends "login/base.html" %}
 {% block title %}Home{% endblock title %}
 {% block content %}
-    <h1>Home Page</h2>
-    <p>
-        {% if user.is_authenticated %}
-            Hi {{ user.first_name }}!
-            <p><a href="{% url 'logout' %}">logout</a></p>
-        {% else %}
-            <p>You are not logged in</p>
-            <a href="{% url 'login' %}">login</a>
-        {% endif %}
-    </p>
+    
+<h1>Home Page</h2>
+
+    {% if user.is_authenticated %}
+        Hi {{ user.first_name }}!
+        <p>
+            <a href="{% url 'logout' %}">logout</a><br>
+            <a href="{% url 'new_post' %}">Nova Pergunta</a>
+        </p>
+        
+    {% else %}
+        <p>You are not logged in</p>
+        <a href="{% url 'login' %}">login</a> <a href = "{% url 'cadastro' %}">cadastrar </a>
+    {% endif %}
+    
+    
 {% endblock content %}

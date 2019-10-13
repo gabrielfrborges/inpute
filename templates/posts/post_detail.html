@@ -1,0 +1,33 @@
+{% extends "login/base.html" %}
+{% block title %}{{ question.title }}{% endblock title %}
+
+{% block content %}
+    <div>
+
+        <div> <h1>{{ question.title }}</h1> </div>
+            <div>
+                <p> {{ question.description | linebreaks }} </p>
+            </div>
+            <div>
+                Question made by: {{ question.user.first_name }}<br> 
+                {{ question.date }}
+            </div>
+    </div>
+
+    <hr>
+    <a class="btn btn-default" href="{% url 'add_answer' pk=question.pk %}">Add comment</a>
+
+    {% for answer in question.answer.all %}
+        <div>
+            
+            <div><small style="color: grey">{{ answer.date }}</small></div>
+            <strong> {{ answer.user }} </strong>
+            <p> {{ answer.description | linebreaks }} </p>
+
+        </div>
+
+    {% empty %}
+        <p>Sem respostas ainda</p>
+    {% endfor %}
+    
+{% endblock content %}

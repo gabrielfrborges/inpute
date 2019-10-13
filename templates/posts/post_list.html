@@ -1,0 +1,17 @@
+{% extends 'login/base.html' %}
+{% block title %}Perguntas{% endblock %}
+{% block content %}
+    <h1>Perguntas</h1>
+    {% for question in questions %}
+        <div>
+            <div>
+                <a href ="{% url 'post_detail' pk=question.pk %}">
+                    {{ question.title }} - {{ question.user.username }}
+                </a>
+            </div>
+            <div><small style="color: grey">{{ answer.date }}</small></div>
+            <div>{{ question.description | linebreaks }}</div>
+        </div>
+        
+    {% endfor %}
+{% endblock content %}
