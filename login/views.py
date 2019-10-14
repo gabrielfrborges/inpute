@@ -1,8 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import DetailView
 from django.http import HttpResponse
-from .forms import Cadastro
+from .forms import Cadastro, UserUpdateForm, ProfileUpdateForm
+from .models import Profile
+from django.contrib.auth.models import User
+
 # Create your views here.
 
 def cadastro(request):
@@ -28,6 +33,21 @@ def home(request):
     if user.is_authenticated():
         data = {
             'username':user.username,
-            'user_course':user.profile.get_user_courses_display()
+            'user_course':user.profile.get_user_courses_display(),
+            'full_name':user.full_name  
         }
     return render(request, 'login/home.html', {'data': data })
+
+class ProfileView(LoginRequiredMixin, DetailView):
+    model = User
+    context_object_name = 'profile'
+
+@login_required
+def profile_update(request):
+    context = {
+        'form_u': UserUpdateForm(instance= request.user),
+        'form_p': ProfileUpdateForm(instance= request.user.profile)
+    }
+    return render(request, 'login/profile_edit.html', context)
+
+    

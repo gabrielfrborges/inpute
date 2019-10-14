@@ -5,7 +5,7 @@ from .models import Profile
 
 class Cadastro(UserCreationForm):
   first_name = forms.CharField(
-    max_length= 30, required= False, help_text= 'Opitional',
+    max_length= 30, required= True, help_text= 'Required',
     widget = forms.TextInput(attrs = {'placeholder': 'Nome'}))
 
   last_name = forms.CharField(
@@ -34,4 +34,43 @@ class Cadastro(UserCreationForm):
     'password1', 
     'password2',
     'user_ra',
+    'user_course',
+    )
+
+class UserUpdateForm(forms.ModelForm):
+  first_name = forms.CharField(
+    max_length= 30, required= True, help_text= 'Required',
+    widget = forms.TextInput(attrs = {'placeholder': 'Nome'}))
+
+  last_name = forms.CharField(
+    max_length= 30, required= False, help_text= 'Opitional',
+    widget = forms.TextInput(attrs = {'placeholder': 'Sobrenome'}))
+
+  email = forms.EmailField(
+    max_length=254, required= True, 
+    help_text ='Required. Inform a valid email address.',
+    widget = forms.TextInput(attrs = {'placeholder': 'Email'}))
+  
+  class Meta:
+    model = User
+    fields = (
+    'username', 
+    'first_name', 
+    'last_name', 
+    'email',
+    )
+
+class ProfileUpdateForm(forms.ModelForm):
+  user_ra = forms.CharField(
+    max_length= 30,  required= True, help_text='Required',
+    label = 'RA', error_messages='')
+
+  user_course = forms.ChoiceField(
+    choices= Profile.COURSE_CHOISES, label = 'Curso')
+  
+  class Meta:
+    model = Profile
+    fields =(
+    'user_ra',
+    'user_course',
     )
