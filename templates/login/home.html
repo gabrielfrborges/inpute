@@ -5,10 +5,11 @@
 <h1>Home Page</h2>
 
     {% if user.is_authenticated %}
-        Hi {{ user.first_name }}!
+        Olá,  {{ user.first_name }}!
         <p>
             <a href="{% url 'logout' %}">logout</a><br>
-            <a href="{% url 'new_post' %}">Nova Pergunta</a>
+            <a href="{% url 'new_post' %}">Nova Pergunta</a><br>
+            <a href="{% url 'post_list' %}">Perguntas</a>
         </p>
         
     {% else %}

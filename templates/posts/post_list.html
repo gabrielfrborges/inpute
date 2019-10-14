@@ -10,7 +10,9 @@
                 </a>
             </div>
             <div><small style="color: grey">{{ answer.date }}</small></div>
-            <div>{{ question.description | linebreaks }}</div>
+            <div>
+                <p>{{ question.description | truncatechars:30}}</p>
+            </div>
         </div>
         
     {% endfor %}

@@ -10,7 +10,7 @@
             </div>
             <div>
                 Question made by: {{ question.user.first_name }}<br> 
-                {{ question.date }}
+                {{ question.date |date:'d/m/y' }}
             </div>
     </div>
 
