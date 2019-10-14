@@ -4,14 +4,21 @@
 {% block content %}
     <div>
 
-        <div> <h1>{{ question.title }}</h1> </div>
-            <div>
-                <p> {{ question.description | linebreaks }} </p>
-            </div>
-            <div>
-                Question made by: {{ question.user.first_name }}<br> 
-                {{ question.date |date:'d/m/y' }}
-            </div>
+        <div> 
+            <h1>{{ question.title }}</h1>
+        </div>
+
+        <div>
+            <p> {{ question.description | linebreaks }} </p>
+        </div>
+        
+        <div>
+            Question made by:
+                <a href ="{% url 'perfil' pk=question.user.pk  %}"> 
+                    {{ question.user.username }}<br>
+                </a>
+            {{ question.date |date:'d/m/y' }}
+        </div>
     </div>
 
     <hr>
@@ -21,7 +28,7 @@
         <div>
             
             <div><small style="color: grey">{{ answer.date }}</small></div>
-            <strong> {{ answer.user }} </strong>
+            <a href= "{% url 'perfil' pk=answer.user.pk %}"> {{ answer.user.username }} </a>
             <p> {{ answer.description | linebreaks }} </p>
 
         </div>

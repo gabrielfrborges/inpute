@@ -1,0 +1,26 @@
+{% extends "login/base.html" %}
+{% block title %}Perfil{% endblock title %}
+
+{% block content %}
+    <h1> Perfil </h1>
+
+    <div>
+        <label>Nome: {{ profile.first_name }}</label>
+    </div>
+
+    <div>
+        <label>Sobrenome: {{ profile.last_name }}</label>
+    </div>
+
+    <div>
+        <label>Usuário: {{ profile.pa }}</label>
+    </div>
+
+    <div>
+        <label>Curso: {{ profile.profile.user_course }}</label>
+    </div>
+
+    <div>
+        <label>RA: {{ profile.profile.user_ra }}</label>
+    </div>
+{% endblock content %}

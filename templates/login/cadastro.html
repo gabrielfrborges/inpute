@@ -1,6 +1,5 @@
 {% extends "login/base.html" %}
 {% block title %}Cadastro{% endblock title %}
-
 {% block content %}
     <h2>Sing up</h2>
         <form method = "POST" autocomplete = "off" >
@@ -15,10 +14,10 @@
                         {% endif %}
                         {% for error in field.errors %}
                             <p style="color: red">{{ error }}</p>
-                        {%  endfor%}
+                        {% endfor %}
                     </p>
                 {% endfor %}
             </div>
-        <button type ="submit">Sign up</button>
+        <button class="btn btn-default" type ="submit">Sign up</button>
     </form>
 {% endblock content %}
