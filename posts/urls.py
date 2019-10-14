@@ -8,7 +8,7 @@ from posts.views import (
 
 
 urlpatterns = [
-    path('new/', QuestionCreateView. as_view(
+    path('new/', QuestionCreateView.as_view(
         template_name = 'posts/post_form.html'), name= 'new_post'),
 
     path('<int:pk>/', QuestionView.as_view(
