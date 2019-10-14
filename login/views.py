@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .forms import Cadastro
 # Create your views here.
@@ -22,15 +23,11 @@ def cadastro(request):
         form = Cadastro()
     return render(request, 'login/cadastro.html', {'form': form})
 
+@login_required 
 def home(request):
     if user.is_authenticated():
         data = {
             'username':user.username,
             'user_course':user.profile.get_user_courses_display()
-        }
-    else:
-        data = {
-            'username':'Annoymous',
-            'user_course':''
         }
     return render(request, 'login/home.html', {'data': data })
