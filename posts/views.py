@@ -9,7 +9,7 @@ class QuestionView(LoginRequiredMixin ,DetailView):
     model = Question
     content_object_name = 'question'
 
-class QuestionCreateView(LoginRequiredMixin ,CreateView):
+class QuestionCreateView(LoginRequiredMixin, CreateView):
     model = Question
     fields =['title', 'description']
 
@@ -25,7 +25,7 @@ def add_answer(request, pk):
         if form.is_valid():
             answer = form.save(commit = False)
             answer.question = question
-            answer.user = request.user.username
+            answer.user = request.user
             answer.save()
             return redirect('post_detail', pk = question.pk)
     else:

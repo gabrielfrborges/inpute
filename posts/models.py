@@ -27,7 +27,8 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    user = models.CharField(max_length= 150)
+    user = models.ForeignKey(User, on_delete = models.CASCADE,
+        related_name= 'user_answer')
     
     question = models.ForeignKey(
         Question, on_delete = models.CASCADE, 

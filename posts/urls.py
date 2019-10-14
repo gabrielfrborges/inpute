@@ -17,6 +17,6 @@ urlpatterns = [
     path('list/', QuestionListView.as_view(
         template_name = "posts/post_list.html"), name ='post_list'),
 
-    path('<int:pk>/answer/', add_answer, name='add_answer'), 
+    path('<int:pk>/answer/', add_answer, name='add_answer'),
 
 ]
