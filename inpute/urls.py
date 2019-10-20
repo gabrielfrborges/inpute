@@ -17,9 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 from posts.views import QuestionCreateView
+
 urlpatterns = [
+
     path('admin/', admin.site.urls),
+
     path('login/', include('login.urls')),
+
     path('post/', include('posts.urls')),
-    path('home/', TemplateView.as_view(template_name='login/home.html'), name='home'),
+
+    path('home/', TemplateView.as_view(
+        template_name='login/home.html'), name='home'),
 ]

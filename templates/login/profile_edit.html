@@ -3,9 +3,11 @@
 
 
 {% block content %}
+    <a href= "#">Editar Senha</a>
     <form method= 'POST' enctype= "multipart/form-data">
         {% csrf_token %}
         {{ form_u.as_p }}
         {{ form_p.as_p }}
+        <button class="btn btn= default" type="submit">Enviar</button>
     </from>
 {% endblock content %}

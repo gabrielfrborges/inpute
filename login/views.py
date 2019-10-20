@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import views
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
 from django.http import HttpResponse
@@ -9,6 +10,12 @@ from .models import Profile
 from django.contrib.auth.models import User
 
 # Create your views here.
+
+def custom_login(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        return views.login(request)
 
 def cadastro(request):
     if request.method == 'POST':
@@ -44,10 +51,21 @@ class ProfileView(LoginRequiredMixin, DetailView):
 
 @login_required
 def profile_update(request):
-    context = {
-        'form_u': UserUpdateForm(instance= request.user),
-        'form_p': ProfileUpdateForm(instance= request.user.profile)
-    }
-    return render(request, 'login/profile_edit.html', context)
+    if request.method == 'POST':
+        form_u = UserUpdateForm(request.POST, instance= request.user)
+        form_p = ProfileUpdateForm(request.POST, instance= request.user.profile)
+        if form_u.is_valid() and   form_p.is_valid():
+            form_u.save()
+            form_p.save()
+            return redirect('my_profile')
+    else:
+        context = {
+            'form_u': UserUpdateForm(instance= request.user),
+            'form_p': ProfileUpdateForm(instance= request.user.profile)
+        }
+        return render(request, 'login/profile_edit.html', context)
 
-    
+@login_required
+def my_profile(request):
+    return redirect('perfil', pk= request.user.pk)
+

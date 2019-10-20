@@ -45,19 +45,17 @@ class UserUpdateForm(forms.ModelForm):
   last_name = forms.CharField(
     max_length= 30, required= False, help_text= 'Opitional',
     widget = forms.TextInput(attrs = {'placeholder': 'Sobrenome'}))
-
-  email = forms.EmailField(
-    max_length=254, required= True, 
-    help_text ='Required. Inform a valid email address.',
-    widget = forms.TextInput(attrs = {'placeholder': 'Email'}))
   
   class Meta:
     model = User
+    exclude = [
+      'password',
+      'username',
+      'email'
+    ]
     fields = (
-    'username', 
     'first_name', 
-    'last_name', 
-    'email',
+    'last_name',
     )
 
 class ProfileUpdateForm(forms.ModelForm):

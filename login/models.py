@@ -14,10 +14,10 @@ class Profile(models.Model):
     ('ADS','Analise e desenvolvimento de sistemas')
   ]
   user_course = models.CharField(max_length= 5, choices= COURSE_CHOISES, default= 'ADS')
-  
+
   @property
   def full_name(self):
-    return  '{} {}'.format(self.first_name, self.last_name)
+    return  '{} {}'.format(self.user.first_name, self.user.last_name)
 
   def __str__(self):
     return self.user.username
