@@ -17,12 +17,22 @@
                 <a href ="{% url 'perfil' pk=question.user.pk  %}"> 
                     {{ question.user.username }}<br>
                 </a>
+                <div>
+                    {% if question.user.pk == user.pk %}
+                        <a href ="{% url 'post_edit' pk=question.pk %}">Editar pergunta</a>
+                    {% endif %}
+                </div>
+                
             {{ question.date |date:'d/m/y' }}
         </div>
     </div>
 
     <hr>
-    <a class="btn btn-default" href="{% url 'add_answer' pk=question.pk %}">Add comment</a>
+    <a href="{% url 'add_answer' pk=question.pk %}">
+        <button class ="btn btn-default">
+            Responder
+        </button>
+        </a>
 
     {% for answer in question.answer.all %}
         <div>

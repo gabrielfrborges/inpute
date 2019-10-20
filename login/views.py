@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import views
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
@@ -54,7 +55,7 @@ def profile_update(request):
     if request.method == 'POST':
         form_u = UserUpdateForm(request.POST, instance= request.user)
         form_p = ProfileUpdateForm(request.POST, instance= request.user.profile)
-        if form_u.is_valid() and   form_p.is_valid():
+        if form_u.is_valid() and form_p.is_valid():
             form_u.save()
             form_p.save()
             return redirect('my_profile')
@@ -68,4 +69,17 @@ def profile_update(request):
 @login_required
 def my_profile(request):
     return redirect('perfil', pk= request.user.pk)
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.POST, instance = request.user)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect('my_perfil')
+    else:
+        form = PasswordChangeForm(request.user)
+        context = {'form': form}
+        return render(request, 'login/profile_password.html', context)
 

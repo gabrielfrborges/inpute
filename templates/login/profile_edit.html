@@ -3,7 +3,7 @@
 
 
 {% block content %}
-    <a href= "#">Editar Senha</a>
+    <a href= "{% url 'change_password' %}">Mudar senha</a>
     <form method= 'POST' enctype= "multipart/form-data">
         {% csrf_token %}
         {{ form_u.as_p }}

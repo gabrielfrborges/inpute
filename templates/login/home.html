@@ -9,13 +9,13 @@
         <p>
             <a href="{% url 'logout' %}">logout</a><br>
             <a href="{% url 'new_post' %}">Nova Pergunta</a><br>
-            <a href="{% url 'post_list' %}">Perguntas</a>
+            <a href="{% url 'post_list' %}">Perguntas</a><br>
+            <a href="{% url 'my_profile' %}">Perfil</a>
         </p>
-        
+    
     {% else %}
         <p>You are not logged in</p>
         <a href="{% url 'login' %}">login</a> <a href = "{% url 'cadastro' %}">cadastrar </a>
     {% endif %}
-    
     
 {% endblock content %}

@@ -22,6 +22,7 @@ from login.views import (
     profile_update,
     custom_login,
     my_profile,
+    change_password,
     
     )
 
@@ -38,5 +39,7 @@ urlpatterns = [
     path('perfil/edit', profile_update, name= 'perfil_edit'),
 
     path('perfil/my', my_profile, name= 'my_profile'),
+
+    path('perfil/senha', change_password, name = 'change_password' )
 
 ]

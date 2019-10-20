@@ -19,6 +19,7 @@ from posts.views import (
     QuestionCreateView,
     QuestionListView,
     add_answer,
+    change_post
     )
 
 
@@ -33,5 +34,7 @@ urlpatterns = [
         template_name = "posts/post_list.html"), name ='post_list'),
 
     path('<int:pk>/answer/', add_answer, name='add_answer'),
+
+    path('<int:pk>/edit', change_post, name = 'post_edit')
 
 ]
