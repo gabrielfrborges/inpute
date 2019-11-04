@@ -37,6 +37,7 @@ class Answer(models.Model):
     description = models.TextField()
     date = models.DateField(default = timezone.now)
 
+    verified = models.BooleanField(default= False)
     def __str__():
         return self.description
     

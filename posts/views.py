@@ -46,7 +46,7 @@ def change_post(request, pk):
         if form.is_valid():
             post =  form.save(commit = False)
             post.date = timezone.now()
-            post.user = request.user
+            post.user = request.useredit_
             post.save()
             return redirect('post_detail', pk = post.pk)
     else:

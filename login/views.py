@@ -8,6 +8,7 @@ from django.views.generic import DetailView
 from django.http import HttpResponse
 from .forms import Cadastro, UserUpdateForm, ProfileUpdateForm
 from .models import Profile
+from django.contrib import messages
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -73,13 +74,15 @@ def my_profile(request):
 @login_required
 def change_password(request):
     if request.method == 'POST':
-        form = PasswordChangeForm(request.POST, instance = request.user)
+        form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            return redirect('my_perfil')
+            messages.success(request,'Yeah')
+            return redirect('my_profile')
+        else:
+            messages.error(request,'Nope')
     else:
         form = PasswordChangeForm(request.user)
-        context = {'form': form}
-        return render(request, 'login/profile_password.html', context)
+    return render(request, 'login/profile_password.html', {'form': form})
 

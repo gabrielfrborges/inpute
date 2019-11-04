@@ -24,6 +24,8 @@ class Cadastro(UserCreationForm):
   user_course = forms.ChoiceField(
     choices= Profile.COURSE_CHOISES, label = 'Curso')
 
+  is_monitor = forms.CheckboxInput()
+
   class Meta:
     model= User
     fields = (
@@ -36,6 +38,9 @@ class Cadastro(UserCreationForm):
     'user_ra',
     'user_course',
     )
+    exclude = [
+      'is_monitor'
+    ]
 
 class UserUpdateForm(forms.ModelForm):
   first_name = forms.CharField(
@@ -51,7 +56,8 @@ class UserUpdateForm(forms.ModelForm):
     exclude = [
       'password',
       'username',
-      'email'
+      'email',
+      'is_monitor',
     ]
     fields = (
     'first_name', 

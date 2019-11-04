@@ -36,7 +36,7 @@
 
     {% for answer in question.answer.all %}
         <div>
-            
+            <div style ="fontcolor: green;"> {% if answer.verified %} Verificado {% endif %}</div>
             <div><small style="color: grey">{{ answer.date }}</small></div>
             <a href= "{% url 'perfil' pk=answer.user.pk %}"> {{ answer.user.username }} </a>
             <p> {{ answer.description | linebreaks }} </p>
