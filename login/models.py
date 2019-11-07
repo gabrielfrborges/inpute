@@ -11,7 +11,12 @@ class Profile(models.Model):
   user_ra = models.CharField(max_length= 30)
   COURSE_CHOISES= [
     ('BD', 'Banco de dados'),
-    ('ADS','Analise e desenvolvimento de sistemas')
+    ('ADS','Analise e desenvolvimento de sistemas'),
+    ('GPI','Gestão da produção industrial'),
+    ('MA','Manufatura avançada'),
+    ('Log','Logistica'),
+    ('MDA','Manutenção de aeronaves'),
+    ('PEA','Projetos de estruturas aeronáuticas')
   ]
   user_course = models.CharField(max_length= 5, choices= COURSE_CHOISES, default= 'ADS')
   is_monitor = models.BooleanField(default= False,)
