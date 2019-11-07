@@ -19,7 +19,8 @@ from posts.views import (
     QuestionCreateView,
     QuestionListView,
     add_answer,
-    change_post
+    change_post,
+    verify,
     )
 
 
@@ -35,6 +36,8 @@ urlpatterns = [
 
     path('<int:pk>/answer/', add_answer, name='add_answer'),
 
-    path('<int:pk>/edit', change_post, name = 'post_edit')
+    path('<int:pk>/edit', change_post, name = 'post_edit'),
+
+    path('<int:back>/<int:pk>/verify', verify, name = 'verify'),
 
 ]

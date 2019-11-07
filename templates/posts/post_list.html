@@ -3,17 +3,15 @@
 {% block content %}
     <h1>Perguntas</h1>
     {% for question in questions %}
-        <div>
-            <div>
-                <a href ="{% url 'post_detail' pk=question.pk %}">
-                    {{ question.title }} - {{ question.user.username }}
-                </a>
+        <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+            <a class="mr-2" href="#">{{ question.user.username }}</a>
+            <small class="text-muted">{{ question.date }}</small>
             </div>
-            <div><small style="color: grey">{{ answer.date }}</small></div>
-            <div>
-                <p>{{ question.description | truncatechars:30}}</p>
-            </div>
+            <h2><a class="article-title" href="{% url 'post_detail' pk=question.pk %}">{{ question.title }}</a></h2>
+            <p class="article-content">{{ question.description | truncatechars:50 }}</p>
         </div>
-        
+        </article>
     {% endfor %}
 {% endblock content %}

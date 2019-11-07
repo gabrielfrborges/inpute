@@ -1,50 +1,56 @@
 {% extends "login/base.html" %}
 {% block title %}{{ question.title }}{% endblock title %}
-
+{% load staticfiles %}
 {% block content %}
     <div>
-
-        <div> 
-            <h1>{{ question.title }}</h1>
-        </div>
-
-        <div>
-            <p> {{ question.description | linebreaks }} </p>
-        </div>
-        
-        <div>
-            Question made by:
-                <a href ="{% url 'perfil' pk=question.user.pk  %}"> 
-                    {{ question.user.username }}<br>
-                </a>
-                <div>
-                    {% if question.user.pk == user.pk %}
-                        <a href ="{% url 'post_edit' pk=question.pk %}">Editar pergunta</a>
+       <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                <a class="mr-2" href="{% url 'perfil' pk=question.user.pk %}">{{ question.user.username }}</a>
+                <small class="text-muted">
+                    {{ question.date }} 
+                    {% if question.user == user.pk %}
+                        <a href="{% url 'post_edit' pk=question.pk %}">Editar</a>
                     {% endif %}
+                </small>
                 </div>
-                
-            {{ question.date |date:'d/m/y' }}
-        </div>
+                <h2>{{ question.title }}</h2>
+                <p class="article-content">{{ question.description | linebreaks }}</p>
+            </div>
+        </article>
     </div>
-
-    <hr>
-    <a href="{% url 'add_answer' pk=question.pk %}">
-        <button class ="btn btn-default">
-            Responder
-        </button>
+    <div>
+        <a href="{% url 'add_answer' pk=question.pk %}">
+            <button class ="btn btn-default">
+                Responder
+            </button>
         </a>
 
-    {% for answer in question.answer.all %}
-        <div>
-            <div style ="fontcolor: green;"> {% if answer.verified %} Verificado {% endif %}</div>
-            <div><small style="color: grey">{{ answer.date }}</small></div>
-            <a href= "{% url 'perfil' pk=answer.user.pk %}"> {{ answer.user.username }} </a>
-            <p> {{ answer.description | linebreaks }} </p>
-
-        </div>
-
-    {% empty %}
-        <p>Sem respostas ainda</p>
-    {% endfor %}
-    
+    </div>
+    <hr>
+    <div>
+        {% for answer in question.answer.all %}
+            <article class="media content-section">
+                <div class="media-body"> 
+                    <form action="{% url 'verify' back=question.pk pk=answer.pk %}" method="POST" class="btn-verify">
+                        {% csrf_token %}
+                        {% if answer.verified %}
+                            <button id="v-{{ answer.pk }}" type="submit" class= "save btn btn-success">Verificado</button>
+                        {% else %}
+                            <button id="v-{{ answer.pk }}"s type="submit" class="save btn btn-default">Verificar</button>
+                        {% endif %}
+                    </form>
+                </div>
+                <div class="media-body">
+                    <div class="article-metadata">
+                    <a class="mr-2" href="{% url 'perfil' pk=answer.user.pk %}">{{ answer.user.username }}</a>
+                    <small class="text-muted">{{ answer.date }}</small>
+                    </div>
+                    <p class="article-content">{{ answer.description | linebreaks }}</p>
+                </div>
+            </article>
+        {% empty %}
+            <p>Sem respostas ainda</p>
+        {% endfor %}
+    </div>
 {% endblock content %}

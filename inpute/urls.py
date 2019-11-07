@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
-from posts.views import QuestionCreateView
+from posts.views import QuestionCreateView, QuestionListView
+
 
 urlpatterns = [
 
@@ -26,6 +27,6 @@ urlpatterns = [
 
     path('post/', include('posts.urls')),
 
-    path('home/', TemplateView.as_view(
+    path('home/', QuestionListView.as_view(
         template_name='login/home.html'), name='home'),
 ]

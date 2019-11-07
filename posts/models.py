@@ -38,6 +38,6 @@ class Answer(models.Model):
     date = models.DateField(default = timezone.now)
 
     verified = models.BooleanField(default= False)
-    def __str__():
+    def __str__(self):
         return self.description
     

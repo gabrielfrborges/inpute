@@ -5,20 +5,20 @@ from .models import Profile
 
 class Cadastro(UserCreationForm):
   first_name = forms.CharField(
-    max_length= 30, required= True, help_text= 'Required',
+    max_length= 30, required= True, help_text= 'Obrigatório',
     widget = forms.TextInput(attrs = {'placeholder': 'Nome'}))
 
   last_name = forms.CharField(
-    max_length= 30, required= False, help_text= 'Opitional',
+    max_length= 30, required= False, help_text= 'Opcional',
     widget = forms.TextInput(attrs = {'placeholder': 'Sobrenome'}))
 
   email = forms.EmailField(
     max_length=254, required=True, 
-    help_text ='Required. Inform a valid email address.',
+    help_text ='Obrigatório',
     widget = forms.TextInput(attrs = {'placeholder': 'Email'}))
 
   user_ra = forms.CharField(
-    max_length= 30,  required= True, help_text='Required',
+    max_length= 30,  required= True, help_text='Obrigatório',
     label = 'RA', error_messages='')
 
   user_course = forms.ChoiceField(
@@ -44,7 +44,7 @@ class Cadastro(UserCreationForm):
 
 class UserUpdateForm(forms.ModelForm):
   first_name = forms.CharField(
-    max_length= 30, required= True, help_text= 'Required',
+    max_length= 30, required= True, help_text= 'Obrigatório',
     widget = forms.TextInput(attrs = {'placeholder': 'Nome'}))
 
   last_name = forms.CharField(
@@ -66,7 +66,7 @@ class UserUpdateForm(forms.ModelForm):
 
 class ProfileUpdateForm(forms.ModelForm):
   user_ra = forms.CharField(
-    max_length= 30,  required= True, help_text='Required',
+    max_length= 30,  required= True, help_text='Obrigatório',
     label = 'RA', error_messages='')
 
   user_course = forms.ChoiceField(

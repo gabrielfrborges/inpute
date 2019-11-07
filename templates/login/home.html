@@ -2,20 +2,29 @@
 {% block title %}Home{% endblock title %}
 {% block content %}
     
-<h1>Home Page</h2>
+<!-- <h1>Home Page</h2>-->
 
     {% if user.is_authenticated %}
-        Olá,  {{ user.profile.full_name }}!
-        <p>
-            <a href="{% url 'logout' %}">logout</a><br>
-            <a href="{% url 'new_post' %}">Nova Pergunta</a><br>
-            <a href="{% url 'post_list' %}">Perguntas</a><br>
-            <a href="{% url 'my_profile' %}">Perfil</a>
-        </p>
-    
+        {% for question in questions %}
+            <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                <a class="mr-2" href="#">{{ question.user.username }}</a>
+                <small class="text-muted">{{ question.date }}</small>
+                </div>
+                <h2><a class="article-title" href="{% url 'post_detail' pk=question.pk %}">{{ question.title }}</a></h2>
+                <p class="article-content">{{ question.description | truncatechars:50 }}</p>
+            </div>
+            </article>
+        {% endfor %}
     {% else %}
         <p>You are not logged in</p>
-        <a href="{% url 'login' %}">login</a> <a href = "{% url 'cadastro' %}">cadastrar </a>
+        <a href="{% url 'login' %}">
+            <button class ="btn btn-default">login</button>
+        </a> 
+        <a href = "{% url 'cadastro' %}">
+            <button class ="btn btn-default">cadastro</button>
+        </a>
     {% endif %}
     
 {% endblock content %}
