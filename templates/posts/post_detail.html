@@ -31,7 +31,15 @@
     <div>
         {% for answer in question.answer.all %}
             <article class="media content-section">
-                <div class="media-body"> 
+                <div class="media-body">
+                    <div class="article-metadata">
+                    <a class="mr-2" href="{% url 'perfil' pk=answer.user.pk %}">{{ answer.user.username }}</a>
+                    <small class="text-muted">{{ answer.date }}</small>
+                    </div>
+                    <p class="article-content">{{ answer.description | linebreaks }}</p>
+                </div>
+				<br>
+				<div class="media-body"> 
                     <form action="{% url 'verify' back=question.pk pk=answer.pk %}" method="POST" class="btn-verify">
                         {% csrf_token %}
                         {% if answer.verified %}
@@ -41,13 +49,7 @@
                         {% endif %}
                     </form>
                 </div>
-                <div class="media-body">
-                    <div class="article-metadata">
-                    <a class="mr-2" href="{% url 'perfil' pk=answer.user.pk %}">{{ answer.user.username }}</a>
-                    <small class="text-muted">{{ answer.date }}</small>
-                    </div>
-                    <p class="article-content">{{ answer.description | linebreaks }}</p>
-                </div>
+				
             </article>
         {% empty %}
             <p>Sem respostas ainda</p>

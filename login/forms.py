@@ -44,12 +44,12 @@ class Cadastro(UserCreationForm):
 
 class UserUpdateForm(forms.ModelForm):
   first_name = forms.CharField(
-    max_length= 30, required= True, help_text= 'Obrigatório',
-    widget = forms.TextInput(attrs = {'placeholder': 'Nome'}))
+    max_length= 30, required= True, 
+    widget = forms.TextInput(attrs = {'placeholder': 'Nome obrigatório', 'class': 'form-control'}))
 
   last_name = forms.CharField(
-    max_length= 30, required= False, help_text= 'Opitional',
-    widget = forms.TextInput(attrs = {'placeholder': 'Sobrenome'}))
+    max_length= 30, required= False,
+    widget = forms.TextInput(attrs = {'placeholder': 'Sobrenome opcional', 'class': 'form-control'}))
   
   class Meta:
     model = User
@@ -65,11 +65,13 @@ class UserUpdateForm(forms.ModelForm):
     )
 
 class ProfileUpdateForm(forms.ModelForm):
-  user_ra = forms.CharField(
-    max_length= 30,  required= True, help_text='Obrigatório',
+  user_ra = forms.CharField( 
+    widget = forms.TextInput(attrs= {'class': 'form-control'}),
+    max_length= 30,  required= True, 
     label = 'RA', error_messages='')
 
   user_course = forms.ChoiceField(
+    widget = forms.Select(attrs={'class': 'form-control'}),
     choices= Profile.COURSE_CHOISES, label = 'Curso')
   
   class Meta:

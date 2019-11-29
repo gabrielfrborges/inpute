@@ -3,11 +3,25 @@
 
 
 {% block content %}
-    <a href= "{% url 'change_password' %}">Mudar senha</a>
-    <form method= 'POST' enctype= "multipart/form-data">
-        {% csrf_token %}
-        {{ form_u.as_p }}
-        {{ form_p.as_p }}
-        <button class="btn btn= default" type="submit">Enviar</button>
-    </from>
+	<article class="media content-section">
+		<div class="media-body">
+			<form method= 'POST' enctype= "multipart/form-data">
+			<div class="form-group">
+				{% csrf_token %}
+				{{ form_u.as_p }}
+				{{ form_p.as_p }}
+			</div>
+			</form>
+		</div>
+		<div class="col" style="margin-left:40%;">
+			<div class="row">
+				<a href= "{% url 'change_password' %}">Mudar senha</a>
+			</div>
+			</br>
+			<div class="row">
+				<button class="btn-lg btn btn-success" type="submit">Enviar</button>
+			</div>
+		</div>
+    </article>
+    
 {% endblock content %}

@@ -29,13 +29,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarToggle">
         <div class="navbar-nav mr-auto">
-          <a class="nav-item nav-link" href="#">About</a>
+          <a class="nav-item nav-link d-none" href="#">About</a>
         </div>
         <!-- Navbar Right Side -->
-        <div class="navbar-nav">
-          <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-          <a class="nav-item nav-link" href="{% url 'cadastro' %}">Cadastro</a>
-        </div>
+		
+		{% if user.is_authenticated %}
+			<div class="navbar-nav">
+			  <a href="{% url 'my_profile' %}", style = "color: white;">Olá, {{ user.first_name }}</a>
+			</div>	
+		{% else %}
+			<div class="navbar-nav">
+			  <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+			  <a class="nav-item nav-link" href="{% url 'cadastro' %}">Cadastro</a>
+			</div>		
+		{% endif %}
+
       </div>
     </div>
   </nav>
@@ -58,9 +66,11 @@
             <li class="list-group-item list-group-item-light">
               <a href="{% url 'new_post' %}">Nova pergunta</a>
             </li>
-            <li class="list-group-item list-group-item-light">
-              <a href="{% url 'logout' %}">Logout</a>
-            </li>
+			{% if user.is_authenticated %}
+				<li class="list-group-item list-group-item-light">
+				  <a href="{% url 'logout' %}">Logout</a>
+				</li>
+			{% endif %}
           </ul>
         </p>
       </div>

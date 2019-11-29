@@ -2,30 +2,38 @@
 {% block title %}Perfil{% endblock title %}
 
 {% block content %}
-    <h1> Perfil </h1>
-    {% if user.pk  == profile.pk %}
-        <div>
-            <small><a href = "{% url 'perfil_edit' %}">Editar</a></small>
-        </div> 
-    {% endif %}
+   <article class="media content-section">
+		<div class="media-body">
+			<div class="article-metadata">
+			<h2>{{ profile.username }}</h2>
+			<small class="text-muted">
+				{% if user.pk  == profile.pk %}
+					<div>
+						<a href = "{% url 'perfil_edit' %}">Editar</a>
+					</div>
+				{% endif %}
+			</small>
+			</div>
+			
+			<div>
+				<label>Nome: {{ profile.first_name }}</label>
+			</div>
+			
+			<div>
+				<label>Sobrenome: {{ profile.last_name }}</label>
+			</div>
+			<div>
+				<label>Usuário: {{ profile.username }}</label>
+			</div>	
+			<div>
+				<label>Curso: {{ profile.profile.user_course }}</label>
+			</div>
 
-    <div>
-        <label>Nome: {{ profile.first_name }}</label>
-    </div>
-
-    <div>
-        <label>Sobrenome: {{ profile.last_name }}</label>
-    </div>
-
-    <div>
-        <label>Usuário: {{ profile.username }}</label>
-    </div>
-
-    <div>
-        <label>Curso: {{ profile.profile.user_course }}</label>
-    </div>
-
-    <div>
-        <label>RA: {{ profile.profile.user_ra }}</label>
-    </div>
+			<div>
+				<label>RA: {{ profile.profile.user_ra }}</label>
+			</div>
+			
+		</div>
+	</article>
+    
 {% endblock content %}
